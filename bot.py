@@ -20,7 +20,7 @@ from Crypto.Util.Padding import pad
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- CONFIGURATION ---
-TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = os.getenv("8927723505:AAHStqkXGfw6ZJ5oght_td15uxlz0k1f9J8")
 RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL")
 
 if not TOKEN:
