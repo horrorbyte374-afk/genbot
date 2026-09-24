@@ -178,7 +178,7 @@ class AccountGenerator:
             open_id = resp_tok.json()['data']['open_id']
 
             keystream = [0x30,0x30,0x30,0x32,0x30,0x31,0x37,0x30,0x30,0x30,0x30,0x30,0x32,0x30,0x31,0x37,0x30,0x30,0x30,0x30,0x30,0x32,0x30,0x31,0x37,0x30,0x30,0x30,0x30,0x30,0x32,0x30]
-            field = codecs.decode(''.join(chr(ord(open_id[i]) ^ keystream[i % len(keystream)]).encode('unicode_escape').decode('utf-8')).encode('latin1')
+            field = codecs.decode(''.join(chr(ord(open_id[i]) ^ keystream[i % len(keystream)]) for i in range(len(open_id))).encode('unicode_escape').decode('utf-8'), 'latin1')
 
             name = f"{prefix}{random.randint(10000, 99999)}"
             lang = Config.REGION_LANG.get(region.upper(), "en")
