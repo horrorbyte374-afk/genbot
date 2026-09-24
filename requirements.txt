@@ -1,6 +1,6 @@
-pytelegrambotapi==4.12.7
-flask==3.0.2
-requests==2.31.0
-gunicorn==21.2.0
-pycryptodome==3.20.0
-urllib3==2.2.1
+pytelegrambotapi
+flask
+requests
+gunicorn
+pycryptodome
+urllib3
