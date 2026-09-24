@@ -1,0 +1,10 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Generated account files
+accounts_*.json
+
+# Local environment variables
+.env
