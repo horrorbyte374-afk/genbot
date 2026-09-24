@@ -20,11 +20,13 @@ from Crypto.Util.Padding import pad
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- CONFIGURATION ---
-TOKEN = os.getenv("8927723505:AAHStqkXGfw6ZJ5oght_td15uxlz0k1f9J8")
+# Replace with your actual Telegram Bot Token if you prefer hardcoding it,
+# or set BOT_TOKEN as an environment variable on Render.
+TOKEN = os.getenv("BOT_TOKEN", "8927723505:AAHStqkXGfw6ZJ5oght_td15uxlz0k1f9J8")
 RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL")
 
-if not TOKEN:
-    raise ValueError("BOT_TOKEN environment variable not set!")
+if not TOKEN or TOKEN == "YOUR_BOT_TOKEN_HERE":
+    raise ValueError("Bot Token is not set! Please configure your BOT_TOKEN.")
 
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
@@ -176,7 +178,7 @@ class AccountGenerator:
             open_id = resp_tok.json()['data']['open_id']
 
             keystream = [0x30,0x30,0x30,0x32,0x30,0x31,0x37,0x30,0x30,0x30,0x30,0x30,0x32,0x30,0x31,0x37,0x30,0x30,0x30,0x30,0x30,0x32,0x30,0x31,0x37,0x30,0x30,0x30,0x30,0x30,0x32,0x30]
-            field = codecs.decode(''.join(chr(ord(open_id[i]) ^ keystream[i % len(keystream)]) for i in range(len(open_id))).encode('unicode_escape').decode('utf-8'), 'unicode_escape').encode('latin1')
+            field = codecs.decode(''.join(chr(ord(open_id[i]) ^ keystream[i % len(keystream)]).encode('unicode_escape').decode('utf-8')).encode('latin1')
 
             name = f"{prefix}{random.randint(10000, 99999)}"
             lang = Config.REGION_LANG.get(region.upper(), "en")
@@ -309,4 +311,3 @@ if __name__ == "__main__":
     
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-                    
